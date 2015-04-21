@@ -1,0 +1,22 @@
+<programa> ::= <declaracion_variables> BEGIN <cuerpo_programa> END | BEGIN <cuerpo_programa> END
+<cuerpo_programa> ::= <>
+
+<sentencia> ::= <asignacion>; | <sentencia_if> | <sentenci_repeat_until> | 
+                <sentencia_let> | <sentencia_case> | <sentencia_unary_if> | 
+                <sentencia_q_equal>
+
+<asignacion> ::= 
+
+<expresion> ::= <termino> | <expresion>+<termino> |<expresión>-<término>
+<término> ::= <término> | <factor> * <término> | <factor> / <factor>
+<factor> ::= (<expresion>) | <nombre_variable> | <constante>
+<nombre_variable> ::= <letra> | <nombre_variable>+<letra> | <nombre_variable>+<digito>
+<digito> ::= 1 | 2 |3 | 4 | 5 | 6 | 7 | 8 | 9 | 0
+<letra> ::= a - z | A - Z
+<caracter>
+<numero_entero> ::= <secuencia_digitos> | -<secuencia_digitos>
+<numero_real> ::= <secuencia_digitos>.<secuencia_digitos> | -<secuencia_digitos>.<secuencia_digitos> |
+                  <secuencia_digitos>. | .<secuencia_digitos> | -<secuencia_digitos>. | -.<secuencia_digitos>
+
+<secuencia_digitos> ::= <digito> | <digito><secuencia_digitos>
+<constante_string> ::=
