@@ -1,26 +1,66 @@
-<programa> ::= <declaracion_variables> BEGIN <cuerpo_programa> END | BEGIN <cuerpo_programa> END
-<cuerpo_programa> ::= <>
+<programa> ::= DEFVAR <declaracion_variables> ENDDEF BEGIN <lista_sentencias> END | BEGIN <lista_sentencias> END
+<declaracion_variables> ::=  <declaracion_variable>,<declaracion_variables> |  <declaracion_variable>
 
-<sentencia> ::= <asignacion>; | <sentencia_if> | <sentencia_repeat_until> | 
+<declaracion_variable> ::= <nombre_variable> : <tipo_de_dato>
+
+<lista_sentencias> ::= <sentencia> | <sentencia><lista_sentencias>
+
+<sentencia> ::= <asignacion> | <sentencia_if> | <sentencia_repeat_until> | 
                 <sentencia_let> | <sentencia_case> | <sentencia_unary_if> | 
-                <sentencia_q_equal>
+                <sentencia_q_equal> | <sentencia_put> | <sentencia_get>
+                
+<sentencia_if> ::= if(<condicion>){ <lista_sentencias> }
 
-<asignacion> ::= 
+<sentencia_unary_if> ::= <nombre_variable> = (<condicion>)?<expresion>:<expresion>;
 
-<expresion> ::= <termino> | <expresion>+<termino> |<expresión>-<término>
+<lista_expresion> ::= <expresion> | <expresion>,<lista_expresion>
+
+<sentencia_q_equal> ::= qequal(<expresion>,[<lista_expresion>]);
+
+<comentario> ::=  /!<constante_string>!/
+
+<sentencia_repeat_until> ::= REPEAT{<lista_sentencias>} UNTIL(<condicion>)
+                
+<tipo_de_dato> ::= real | entero | string
+
+<condicion> ::= <condicion_simple> | 
+                <condicion_simple>||<condicion_simple> | 
+                <condicion_simple>&&<condicion_simple>
+                
+<condicion_simple> := <expresion_numerica> >= <expresion_numerica> ||
+                      <expresion_numerica> > <expresion_numerica> ||
+                      <expresion_numerica> == <expresion_numerica> ||
+                      <expresion_numerica> =< <expresion_numerica> ||
+                      <expresion_numerica> < <expresion_numerica> ||
+                      <expresion_no_numerica> == <expresion_no_numerica>
+
+<sentencia_put> ::= PUT "<constante_string>"; | PUT <nombre_variable>;
+
+<sentencia_put> ::= GET <nombre_variable>;
+
+<asignacion> ::= <nombre_variable> = <expresion>;
+
+<expresion> ::= <expresion_no_numerica> | <expresion_numerica>
+
+<expresion_no_numerica> ::=     "<constante_string>"++<nombre_variable> |
+                                <nombre_variable>++"<constante_string>" |
+                                "<constante_string>" | <nombre_variable>
+
+<expresion_numerica> ::= <termino> | <expresion_numerica>+<termino> |<expresion_numerica>-<término>
 <término> ::= <término> | <factor> * <término> | <factor> / <factor>
-<factor> ::= (<expresion>) | <nombre_variable> | <constante>
+<factor> ::= (<expresion_numerica>) | <nombre_variable> | <constante> | <sentencia_q_equal>
 <nombre_variable> ::= <letra> | <nombre_variable>+<letra> | <nombre_variable>+<digito>
 <digito> ::= 1 | 2 |3 | 4 | 5 | 6 | 7 | 8 | 9 | 0
 <letra> ::= a - z | A - Z |
 <espacio> ::= ' '
-<caracter>
+<caracter_especial> 
+--<caracter> ::= <letra> | <digito> | <caracter_especial>
 <numero_entero> ::= <secuencia_digitos> | -<secuencia_digitos>
 <numero_real> ::= <secuencia_digitos>.<secuencia_digitos> | -<secuencia_digitos>.<secuencia_digitos> |
                   <secuencia_digitos>. | .<secuencia_digitos> | -<secuencia_digitos>. | -.<secuencia_digitos>
 
 <secuencia_digitos> ::= <digito> | <digito><secuencia_digitos>
-<constante_string> ::=          "<letra>" | "<digito>" | "<espacio>" | 
-                                "<letra><constante_string>"| 
-                                "<digito><constante_string>" | 
-                                "<espacio><constante_string>" 
+<constante_string> ::=          <letra> | <digito> | <espacio> | 
+                                <letra><constante_string>| 
+                                <digito><constante_string>| 
+                                <espacio><constante_string> 
