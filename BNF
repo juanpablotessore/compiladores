@@ -52,15 +52,12 @@
 <nombre_variable> ::= <letra> | <nombre_variable>+<letra> | <nombre_variable>+<digito>
 <digito> ::= 1 | 2 |3 | 4 | 5 | 6 | 7 | 8 | 9 | 0
 <letra> ::= a - z | A - Z |
-<espacio> ::= ' '
-<caracter_especial> 
---<caracter> ::= <letra> | <digito> | <caracter_especial>
+<caracter_especial> ::= /! todos los caracteres que no son letra o número !/
+<caracter> ::= <letra> | <digito> | <caracter_especial>
 <numero_entero> ::= <secuencia_digitos> | -<secuencia_digitos>
 <numero_real> ::= <secuencia_digitos>.<secuencia_digitos> | -<secuencia_digitos>.<secuencia_digitos> |
                   <secuencia_digitos>. | .<secuencia_digitos> | -<secuencia_digitos>. | -.<secuencia_digitos>
 
 <secuencia_digitos> ::= <digito> | <digito><secuencia_digitos>
-<constante_string> ::=          <letra> | <digito> | <espacio> | 
-                                <letra><constante_string>| 
-                                <digito><constante_string>| 
-                                <espacio><constante_string> 
+<constante_string> ::= <caracter> | <caracter><constante_string>
+                                
